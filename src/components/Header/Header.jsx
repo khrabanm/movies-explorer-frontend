@@ -24,7 +24,7 @@ function Header({ isLoggedIn = true }) {
         <Logo />
         {isLoggedIn && width > 1152 && <Navigation className="header__nav" isWhite={isMainPage} />}
         <div className="header__buttons">
-          {isLoggedIn && width > 1152 && <Button className="header__account">Аккаунт</Button>}
+          {isLoggedIn && width > 1152 && <Button href="/profile" className="header__account">Аккаунт</Button>}
           {isLoggedIn && width <= 1152 && (
             <Button
               className={getModifier('header__menu')}
@@ -58,7 +58,7 @@ function Header({ isLoggedIn = true }) {
       {isLoggedIn && width <= 1152 && open && (
         <Menu onClick={() => setOpen(false)}>
           <Navigation />
-          <Button className="header__account">Аккаунт</Button>
+          <Button href="/profile" className="header__account">Аккаунт</Button>
         </Menu>
       )}
     </header>
