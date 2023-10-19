@@ -1,0 +1,16 @@
+.filter-checkbox {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.filter-checkbox__input {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  .filter-checkbox__text {
+    font-size: 11px;
+  }
+}

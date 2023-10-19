@@ -1,0 +1,8 @@
+.radio-button {
+    cursor: pointer;
+    display: flex;
+}
+
+.radio-button__input {
+    display: none;
+}

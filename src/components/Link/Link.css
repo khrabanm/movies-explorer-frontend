@@ -1,0 +1,14 @@
+.Link {
+    color: var(--orange);
+    text-decoration: none;
+}
+
+.Link:hover {
+    opacity: 0.7;
+}
+
+@media (max-width: 767px) {
+    .Link {
+        font-size: 12px;
+    }
+}
