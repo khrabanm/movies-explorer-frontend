@@ -1,16 +1,16 @@
 import './Button.css';
+import {Link} from 'react-router-dom';
 
 function Button({ children, className, onClick, href, ...props }) {
   return (
       <>
       {href ? (
-          <a
-            href={href}
+          <Link
+            to={href}
             className={`button ${className || ''}`}
-            {...props}
           >
             {children}
-          </a>
+          </Link>
         ) : (
             <button
                 onClick={onClick}
