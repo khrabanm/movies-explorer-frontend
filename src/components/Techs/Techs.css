@@ -29,6 +29,7 @@
   display: grid;
   grid-template-columns: repeat(7, 90px);
   gap: 10px;
+  justify-content: center;
 }
 
 .techs__stack-item {
