@@ -1,26 +1,19 @@
 import './Button.css';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 function Button({ children, className, onClick, href, ...props }) {
+  if (href) {
+    return (
+      <Link to={href} className={`button ${className || ''}`}>
+        {children}
+      </Link>
+    );
+  }
+
   return (
-      <>
-      {href ? (
-          <Link
-            to={href}
-            className={`button ${className || ''}`}
-          >
-            {children}
-          </Link>
-        ) : (
-            <button
-                onClick={onClick}
-                className={`button ${className || ''}`}
-                {...props}
-            >
-              {children}
-            </button>
-        )}
-      </>
+    <button onClick={onClick} className={`button ${className || ''}`} {...props}>
+      {children}
+    </button>
   );
 }
 
