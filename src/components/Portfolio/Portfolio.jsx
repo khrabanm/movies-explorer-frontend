@@ -9,7 +9,7 @@ function Portfolio() {
           <li className="portfolio__item">
             <a
               className="portfolio__link"
-              href="https://github.com/khrabanm"
+              href="https://github.com/khrabanm/how-to-learn"
               target="_blank"
               rel="noreferrer"
             >
@@ -20,7 +20,7 @@ function Portfolio() {
           <li className="portfolio__item">
             <a
               className="portfolio__link"
-              href="https://github.com/khrabanm"
+              href="https://github.com/khrabanm/russian-travel"
               target="_blank"
               rel="noreferrer"
             >
@@ -31,7 +31,7 @@ function Portfolio() {
           <li className="portfolio__item">
             <a
               className="portfolio__link"
-              href="https://github.com/khrabanm"
+              href="https://github.com/khrabanm/react-mesto-api-full-gha"
               target="_blank"
               rel="noreferrer"
             >
