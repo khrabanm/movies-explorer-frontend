@@ -19,7 +19,7 @@
     color: var(--white);
 }
 
-@media (max-width: 1152px) {
+@media (max-width: 768px) {
     .navigation {
         flex-direction: column;
         gap: 28px;

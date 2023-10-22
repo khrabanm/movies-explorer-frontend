@@ -1,6 +1,6 @@
 import { NavLink } from 'react-router-dom';
 import './Navigation.css';
-import useWindowDimensions from "../../hooks/useWindowDimensions";
+import useWindowDimensions from '../../hooks/useWindowDimensions';
 
 function Navigation({ isWhite = false, className }) {
   const { width } = useWindowDimensions();
@@ -11,7 +11,7 @@ function Navigation({ isWhite = false, className }) {
 
   return (
     <nav className={`navigation ${className || ''}`}>
-      {width <= 1152 && (
+      {width <= 768 && (
         <NavLink to="/" className={getClass}>
           Главная
         </NavLink>
