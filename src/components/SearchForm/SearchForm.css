@@ -32,4 +32,8 @@
   .search-form__input {
     font-size: 11px;
   }
+
+  .search-form__container {
+    padding: 6px 6px 6px 19px;
+  }
 }

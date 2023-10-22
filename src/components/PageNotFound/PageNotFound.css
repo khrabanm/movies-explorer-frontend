@@ -4,32 +4,31 @@
   align-items: center;
   justify-content: space-between;
   line-height: normal;
-  height: calc(100vh - 35vh - 9vh);
-  padding: 35vh 0 9vh;
+  padding: 246px 0 60px;
 }
 
 .page-not-found__title {
   font-size: 140px;
+  font-weight: 400;
+  line-height: normal;
   margin: 0;
 }
 
 .page-not-found__text {
   text-align: center;
   font-size: 16px;
-  margin: 5px 0;
+  margin: 4px 0 184px;
 }
 
 @media (max-width: 1152px) {
   .page-not-found {
-    height: calc(100vh - 40vh - 22vh);
-    padding: 40vh 0 22vh;
+    padding: 408px 0 222px;
   }
 }
 
 @media (max-width: 767px) {
   .page-not-found {
-    height: calc(100vh - 42vh - 4vh);
-    padding: 42vh 0 4vh;
+    padding: 329px 0 30px;
   }
 
   .page-not-found__title {
@@ -38,5 +37,6 @@
 
   .page-not-found__text {
     font-size: 12px;
+    margin: 10px 0 284px;
   }
 }
