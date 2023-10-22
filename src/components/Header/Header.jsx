@@ -66,7 +66,9 @@ function Header({ isLoggedIn = true }) {
               <Link to="/signup" className={getModifier('header__registration')}>
                 Регистрация
               </Link>
-              <Button className="header__signin">Войти</Button>
+              <Button href="/signin" className="header__signin">
+                Войти
+              </Button>
             </>
           )}
         </div>
