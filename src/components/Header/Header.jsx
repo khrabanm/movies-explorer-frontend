@@ -18,17 +18,33 @@ function Header({ isLoggedIn = true }) {
 
   const getModifier = (block) => `${block} ${isMainPage ? `${block}_theme_violet` : ''}`;
 
+  const handleOpenMenu = () => {
+    setOpen(true);
+    const body = document.querySelector('body');
+    body.style.overflow = 'hidden';
+  };
+
+  const handleCloseMenu = () => {
+    setOpen(false);
+    const body = document.querySelector('body');
+    body.style.overflow = 'auto';
+  };
+
   return (
     <header className={getModifier('header')}>
       <div className="header__container container">
         <Logo />
         {isLoggedIn && width > 1152 && <Navigation className="header__nav" isWhite={isMainPage} />}
         <div className="header__buttons">
-          {isLoggedIn && width > 1152 && <Button href="/profile" className="header__account">Аккаунт</Button>}
+          {isLoggedIn && width > 1152 && (
+            <Button href="/profile" className="header__account">
+              Аккаунт
+            </Button>
+          )}
           {isLoggedIn && width <= 1152 && (
             <Button
               className={getModifier('header__menu')}
-              onClick={() => setOpen((prevState) => !prevState)}
+              onClick={open ? handleCloseMenu : handleOpenMenu}
             >
               {open ? (
                 <img src={close} alt="close" />
@@ -56,9 +72,11 @@ function Header({ isLoggedIn = true }) {
         </div>
       </div>
       {isLoggedIn && width <= 1152 && open && (
-        <Menu onClick={() => setOpen(false)}>
+        <Menu onClick={handleCloseMenu}>
           <Navigation />
-          <Button href="/profile" className="header__account">Аккаунт</Button>
+          <Button href="/profile" className="header__account">
+            Аккаунт
+          </Button>
         </Menu>
       )}
     </header>
