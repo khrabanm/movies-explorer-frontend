@@ -10,6 +10,10 @@
   margin-bottom: 41px;
 }
 
+.search-form__container:focus-within {
+  outline: 1px solid var(--violet);
+}
+
 .search-form__form {
   display: flex;
   flex-direction: column;
@@ -23,9 +27,17 @@
   font-size: 13px;
 }
 
+.search-form__input:focus, .search-form__input:focus-visible {
+  outline: none;
+}
+
 .search-form__button {
   height: 34px;
   border-radius: 48px;
+}
+
+.search-form__button:focus, .search-form__button:focus-visible {
+  outline: 1px solid var(--violet);
 }
 
 @media (max-width: 767px) {

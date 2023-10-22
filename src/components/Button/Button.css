@@ -18,6 +18,14 @@
   opacity: 0.8;
 }
 
+.button:focus {
+  outline: none;
+}
+
+.button:focus-visible {
+  outline: 1px solid var(--violet);
+}
+
 @media (max-width: 767px) {
   .button {
     font-size: 12px;

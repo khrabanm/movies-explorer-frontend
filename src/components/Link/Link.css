@@ -1,14 +1,19 @@
-.Link {
+.link {
     color: var(--orange);
     text-decoration: none;
 }
 
-.Link:hover {
+.link:hover {
     opacity: 0.7;
 }
 
+.link:focus-visible {
+    outline: 1px solid var(--violet);
+    border-radius: 10px;
+}
+
 @media (max-width: 767px) {
-    .Link {
+    .link {
         font-size: 12px;
     }
 }

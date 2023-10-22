@@ -3,7 +3,7 @@ import Link from '../Link/Link';
 
 function PageNotFound() {
   return (
-    <div className="page-not-found">
+    <main className="page-not-found">
       <div className="page-not-found__title-wrapper">
         <h1 className="page-not-found__title">404</h1>
         <p className="page-not-found__text">Страница не найдена</p>
@@ -11,7 +11,7 @@ function PageNotFound() {
       <Link to="/" className="page-not-found__link">
         Назад
       </Link>
-    </div>
+    </main>
   );
 }
 

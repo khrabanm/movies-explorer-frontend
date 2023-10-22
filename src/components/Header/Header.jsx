@@ -35,7 +35,7 @@ function Header({ isLoggedIn = true }) {
       <div className="header__container container">
         <Logo />
         {isLoggedIn && width > 768 && <Navigation className="header__nav" isWhite={isMainPage} />}
-        <div className="header__buttons">
+        <nav className="header__buttons">
           {isLoggedIn && width > 768 && (
             <Button href="/profile" className="header__account">
               Аккаунт
@@ -47,7 +47,7 @@ function Header({ isLoggedIn = true }) {
               onClick={open ? handleCloseMenu : handleOpenMenu}
             >
               {open ? (
-                <img src={close} alt="close" />
+                <img src={close} alt="Закрыть" />
               ) : (
                 <svg xmlns="http://www.w3.org/2000/svg" width="44" height="44" fill="none">
                   <g
@@ -71,7 +71,7 @@ function Header({ isLoggedIn = true }) {
               </Button>
             </>
           )}
-        </div>
+        </nav>
       </div>
       {isLoggedIn && width <= 768 && open && (
         <Menu onClick={handleCloseMenu}>

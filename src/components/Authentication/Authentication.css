@@ -1,23 +1,27 @@
 .authentication {
-  height: 100vh;
   width: 396px;
   margin: 0 auto;
   display: grid;
-  grid-template-rows: minmax(min-content, 217px) 1fr minmax(min-content, 217px);
+  grid-template-rows: 217px 1fr;
 }
 
 .authentication__header {
   align-self: end;
 }
 
+.authentication__form {
+  display: grid;
+  grid-template-rows: 266px 217px;
+}
+
 .authentication__title {
   font-size: 24px;
   font-weight: 500;
-  margin: 40px 0;
+  margin: 35px 0 40px;
   line-height: normal;
 }
 
-.authentication__form {
+.authentication__form-wrapper {
   display: grid;
   align-content: start;
   gap: 20px;
@@ -41,6 +45,10 @@
   padding: 15px;
   font-size: 13px;
   border: none;
+}
+
+.authentication__input:focus, .authentication__input:focus-visible {
+  outline: 1px solid var(--violet);
 }
 
 .authentication__input_error {
@@ -70,14 +78,18 @@
 
 @media (max-width: 1152px) {
   .authentication {
-    grid-template-rows: minmax(min-content, 379px) 1fr minmax(min-content, 379px);
+    grid-template-rows: 379px 1fr;
+  }
+
+  .authentication__form {
+    grid-template-rows: 266px 1fr;
   }
 }
 
 @media (max-width: 767px) {
   .authentication {
     width: 260px;
-    grid-template-rows: minmax(min-content, 253px) 1fr minmax(min-content, 261px);
+    grid-template-rows: 253px 1fr;
   }
 
   .authentication__header {
@@ -94,7 +106,7 @@
 
   .authentication__footer {
     align-self: end;
-    margin: 30px 0;
+    margin: 157px 0 0 0;
   }
 
   .authentication__text {

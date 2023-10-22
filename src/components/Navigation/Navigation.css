@@ -11,12 +11,30 @@
     text-decoration: none;
 }
 
+.navigation__link:focus, .navigation__link:focus-visible {
+    outline: none;
+}
+
+.navigation__link:focus-visible {
+    outline: 1px solid var(--violet);
+    border-radius: 10px;
+}
+
+.navigation__link:hover {
+    opacity: 0.7;
+}
+
 .navigation__link_active {
     font-weight: 500;
 }
 
 .navigation__link_white {
     color: var(--white);
+}
+
+.navigation__link_white:focus-visible {
+    outline: 2px solid var(--white);
+    border-radius: 10px;
 }
 
 @media (max-width: 768px) {

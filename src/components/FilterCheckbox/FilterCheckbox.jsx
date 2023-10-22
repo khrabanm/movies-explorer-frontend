@@ -6,12 +6,12 @@ function FilterCheckbox({ checked, onChange, text }) {
   return (
     <label className="filter-checkbox">
       <input
-        className="filter-checkbox__input"
+        className="filter-checkbox__input visually-hidden"
         type="checkbox"
         checked={checked}
         onChange={onChange}
       />
-      <img src={checked ? smalltumb : smalltumboff} alt="checkbox" />
+      <img src={checked ? smalltumb : smalltumboff} alt="Чекбокс" />
       <span className="filter-checkbox__text">{text}</span>
     </label>
   );

@@ -8,32 +8,36 @@ function Profile() {
   console.log(setError);
 
   return (
-    <section className="profile">
+    <main className="profile">
       <h1 className="profile__title">Привет, Виталий!</h1>
       <form className="profile__form">
         <div className="profile__form-container">
-          <label className="profile__label" htmlFor="name">
-            Имя
-          </label>
           <input
+            placeholder="Имя"
+            minLength="2"
+            maxLength="30"
             className="profile__input"
             type="text"
             id="name"
             value="Виталий"
             disabled={!isEdit}
           />
+          <label className="profile__label" htmlFor="name">
+            Имя
+          </label>
         </div>
         <div className="profile__form-container">
-          <label className="profile__label" htmlFor="email">
-            E-mail
-          </label>
           <input
+            placeholder="E-mail"
             className="profile__input"
             type="email"
             id="email"
             value="pochta@yandex.ru"
             disabled={!isEdit}
           />
+          <label className="profile__label" htmlFor="email">
+            E-mail
+          </label>
         </div>
       </form>
       <div className="profile__buttons">
@@ -55,7 +59,7 @@ function Profile() {
           </>
         )}
       </div>
-    </section>
+    </main>
   );
 }
 

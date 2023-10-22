@@ -34,6 +34,7 @@
 
 .profile__form-container {
   display: flex;
+  flex-direction: row-reverse;
   justify-content: space-between;
   align-items: center;
   font-size: 11px;
@@ -48,6 +49,16 @@
   color: var(--black);
   font-weight: 500;
   text-align: end;
+}
+
+.profile__input:focus,
+.profile__input:focus-visible {
+  outline: none;
+}
+
+.profile__input:focus + .profile__label,
+.profile__input:focus-visible + .profile__label {
+  color: var(--violet);
 }
 
 .profile__buttons {

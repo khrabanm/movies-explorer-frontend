@@ -22,6 +22,15 @@
     color: var(--black);
 }
 
+.nav-tab__link:focus-visible {
+    outline: 1px solid var(--violet);
+    border-radius: 10px;
+}
+
+.nav-tab__link:hover {
+    opacity: 0.7;
+}
+
 @media (max-width: 767px) {
     .nav-tab__list {
         gap: 24px;

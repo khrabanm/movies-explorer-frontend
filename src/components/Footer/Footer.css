@@ -36,11 +36,23 @@
   display: flex;
   gap: 20px;
   align-items: center;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
 }
 
 .footer__link {
   text-decoration: none;
   color: var(--black);
+}
+
+.footer__link:focus-visible {
+  outline: 1px solid var(--violet);
+  border-radius: 10px;
+}
+
+.footer__link:hover {
+  opacity: 0.7;
 }
 
 @media (max-width: 767px) {

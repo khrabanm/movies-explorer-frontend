@@ -2,11 +2,17 @@ import './RadioButton.css';
 import save from '../../images/save.svg';
 import saved from '../../images/saved.svg';
 
-function RadioButton({ checked, onChange }) {
+function RadioButton({ checked, onChange, name }) {
   return (
     <label className="radio-button">
-      <input className="radio-button__input" type="radio" checked={checked} onChange={onChange} />
-      <img src={checked ? saved : save} alt="checkbox" />
+      <input
+        className="radio-button__input visually-hidden"
+        type="radio"
+        checked={checked}
+        onChange={onChange}
+        name={name}
+      />
+      <img src={checked ? saved : save} alt="Чекбокс" />
     </label>
   );
 }

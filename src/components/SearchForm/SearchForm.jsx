@@ -16,7 +16,7 @@ function SearchForm({ className }) {
         <div className="search-form__container">
           <input className="search-form__input" placeholder="Фильм" required />
           <Button className="search-form__button" type="submit">
-            <img src={search} alt="search" />
+            <img src={search} alt="Поиск" />
           </Button>
         </div>
         <FilterCheckbox

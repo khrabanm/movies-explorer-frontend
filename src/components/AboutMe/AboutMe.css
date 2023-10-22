@@ -39,6 +39,12 @@
   text-decoration: none;
   color: var(--black);
   font-weight: 500;
+  width: fit-content;
+}
+
+.about-me__link:focus-visible {
+  outline: 1px solid var(--violet);
+  border-radius: 10px;
 }
 
 .about-me__link:hover {

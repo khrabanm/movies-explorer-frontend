@@ -3,6 +3,11 @@
     display: flex;
 }
 
-.radio-button__input {
-    display: none;
+.radio-button:focus-within {
+    outline: 1px solid var(--violet);
+    border-radius: 10px;
+}
+
+.radio-button:hover {
+    opacity: 0.7;
 }

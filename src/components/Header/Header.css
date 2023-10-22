@@ -12,6 +12,15 @@
   background: var(--violet);
 }
 
+.header_theme_violet .logo:focus-visible img, .header_theme_violet .header__signin:focus-visible {
+  outline: 2px solid var(--white  );
+  border-radius: 10px;
+}
+
+.header_theme_violet .header__account:focus-visible {
+  color: var(--violet);
+}
+
 .header__container {
   display: flex;
   justify-content: space-between;
@@ -49,6 +58,12 @@
 .header .header__registration_theme_violet {
   color: var(--white);
 }
+
+.header .header__registration_theme_violet:focus-visible {
+  outline: 2px solid var(--white);
+  border-radius: 10px;
+}
+
 
 .header .header__signin {
   background: var(--green);

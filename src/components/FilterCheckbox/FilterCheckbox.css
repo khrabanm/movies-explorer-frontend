@@ -5,8 +5,13 @@
   gap: 12px;
 }
 
-.filter-checkbox__input {
-  display: none;
+.filter-checkbox:hover {
+  opacity: 0.7;
+}
+
+.filter-checkbox:focus-within img {
+  outline: 1px solid var(--violet);
+  border-radius: 10px;
 }
 
 @media (max-width: 767px) {

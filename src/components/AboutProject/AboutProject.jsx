@@ -1,5 +1,5 @@
 import './AboutProject.css';
-import Title from "../Title/Title";
+import Title from '../Title/Title';
 
 function AboutProject() {
   return (
@@ -22,16 +22,16 @@ function AboutProject() {
             </p>
           </div>
         </div>
-        <div className="about-project__progress">
-          <div className="about-project__progress-section about-project__progress-section_type_backend">
+        <p className="about-project__progress">
+          <span className="about-project__progress-section about-project__progress-section_type_backend">
             1 неделя
-          </div>
-          <div className="about-project__progress-section about-project__progress-section_type_frontend">
+          </span>
+          <span className="about-project__progress-section about-project__progress-section_type_frontend">
             4 недели
-          </div>
-          <div className="about-project__progress-text">Back-end</div>
-          <div className="about-project__progress-text">Front-end</div>
-        </div>
+          </span>
+          <span className="about-project__progress-text">Back-end</span>
+          <span className="about-project__progress-text">Front-end</span>
+        </p>
       </div>
     </section>
   );
