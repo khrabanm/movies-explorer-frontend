@@ -1,12 +1,12 @@
-import Header from "../Header/Header";
-import Footer from "../Footer/Footer";
+import Header from '../Header/Header';
+import Footer from '../Footer/Footer';
 import './MainContainer.css';
 
 function MainContainer({ isLoggedIn, children }) {
   return (
     <>
       <Header isLoggedIn={isLoggedIn} />
-      <main className="main-container__main">{children}</main>
+      <main className="main-container">{children}</main>
       <Footer />
     </>
   );
