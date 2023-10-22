@@ -40,12 +40,18 @@ function Profile() {
         {isEdit ? (
           <>
             {error && <p className="profile__error">{error}</p>}
-            <Button className="profile__save" onClick={() => setIsEdit(false)}>Сохранить</Button>
+            <Button className="profile__save" onClick={() => setIsEdit(false)}>
+              Сохранить
+            </Button>
           </>
         ) : (
           <>
-            <Button className="profile__edit" onClick={() => setIsEdit(true)}>Редактировать</Button>
-            <Button className="profile__exit">Выйти из аккаунта</Button>
+            <Button className="profile__edit" onClick={() => setIsEdit(true)}>
+              Редактировать
+            </Button>
+            <Button className="profile__exit" href="/">
+              Выйти из аккаунта
+            </Button>
           </>
         )}
       </div>
