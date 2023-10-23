@@ -1,0 +1,86 @@
+@import './vendor/normolize.css';
+
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('./vendor/fonts/Inter-Regular.woff2?v=3.19') format('woff2'),
+    url('./vendor/fonts/Inter-Regular.woff?v=3.19') format('woff');
+}
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('./vendor/fonts/Inter-Medium.woff2?v=3.19') format('woff2'),
+    url('./vendor/fonts/Inter-Medium.woff?v=3.19') format('woff');
+}
+
+:root {
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.5;
+
+  color: var(--black);
+  background-color: var(--white);
+
+  --minWidth: 320px;
+  --maxWidth: 1280;
+  --maxWidthContainer: 1140;
+
+  --black: #000;
+  --white: #fff;
+  --orange: #ff6838;
+  --gray: #a0a0a0;
+  --gray2: #e8e8e8;
+  --gray3: #f2f2f2;
+  --gray-light: #f9f9f9;
+  --gray-light2: #fafafa;
+  --gray-light3: #f5f5f5;
+  --red: #ee3465;
+  --green: #2be080;
+  --violet: #465dff;
+}
+
+body {
+  min-width: var(--minWidth);
+  min-height: 100vh;
+}
+
+.container {
+  box-sizing: border-box;
+  width: calc(var(--maxWidthContainer) / var(--maxWidth) * 100%);
+  margin: 0 auto;
+}
+
+.page {
+  flex: 1 1 auto;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  border: 0;
+  clip: rect(0 0 0 0);
+}
+
+@media (max-width: 1152px) {
+  .container {
+    width: 100%;
+    padding-right: 50px;
+    padding-left: 50px;
+  }
+}
+
+@media (max-width: 767px) {
+  .container {
+    padding-right: 14px;
+    padding-left: 14px;
+  }
+}

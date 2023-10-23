@@ -1,0 +1,21 @@
+.filter-checkbox {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.filter-checkbox:hover {
+  opacity: 0.7;
+}
+
+.filter-checkbox:focus-within img {
+  outline: 1px solid var(--violet);
+  border-radius: 10px;
+}
+
+@media (max-width: 767px) {
+  .filter-checkbox__text {
+    font-size: 11px;
+  }
+}

@@ -1,0 +1,101 @@
+.header {
+  position: relative;
+  display: flex;
+  padding: 18px 0;
+}
+
+.header__nav {
+  padding-left: 62px;
+}
+
+.header_theme_violet {
+  background: var(--violet);
+}
+
+.header_theme_violet .logo:focus-visible img, .header_theme_violet .header__signin:focus-visible {
+  outline: 2px solid var(--white  );
+  border-radius: 10px;
+}
+
+.header_theme_violet .header__account:focus-visible {
+  color: var(--violet);
+}
+
+.header__container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header__buttons {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.header .header__account {
+  width: 100px;
+  height: 32px;
+  background: var(--gray-light);
+  color: var(--black);
+  line-height: 16px;
+  border-radius: 20px;
+}
+
+.header .header__menu {
+  background: transparent;
+  width: 44px;
+  height: 44px;
+  z-index: 2;
+  margin: -3px 0 -3px;
+}
+
+.header .header__registration {
+  color: var(--black);
+  font-size: 12px;
+}
+
+.header .header__registration_theme_violet {
+  color: var(--white);
+}
+
+.header .header__registration_theme_violet:focus-visible {
+  outline: 2px solid var(--white);
+  border-radius: 10px;
+}
+
+
+.header .header__signin {
+  background: var(--green);
+  color: var(--black);
+  width: 76px;
+  height: 32px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+@media (max-width: 1152px) {
+    .header__container {
+        padding: 0 30px
+    }
+}
+
+@media (max-width: 767px) {
+  .header__container {
+    padding: 0 14px
+  }
+
+  .header__buttons {
+    gap: 14px;
+  }
+
+  .header .header__registration {
+    font-size: 10px;
+  }
+
+  .header .header__signin {
+    width: 54px;
+    height: 26px;
+    font-size: 10px;
+  }
+}

@@ -1,0 +1,13 @@
+.radio-button {
+    cursor: pointer;
+    display: flex;
+}
+
+.radio-button:focus-within {
+    outline: 1px solid var(--violet);
+    border-radius: 10px;
+}
+
+.radio-button:hover {
+    opacity: 0.7;
+}
