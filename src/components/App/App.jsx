@@ -8,147 +8,25 @@ import Header from '../Header/Header';
 import Profile from '../Profile/Profile';
 import PageNotFound from '../PageNotFound/PageNotFound';
 import Authentication from '../Authentication/Authentication';
-import film from '../../images/film.jpg';
-
-const FILMS = [
-  {
-    id: 1,
-    name: '33 слова о дизайне',
-    duration: '1ч42м',
-    isLiked: false,
-    image: film,
-  },
-  {
-    id: 2,
-    name: '33 слова о дизайне',
-    duration: '1ч42м',
-    isLiked: true,
-    image: film,
-  },
-  {
-    id: 3,
-    name: '33 слова о дизайне',
-    duration: '1ч42м',
-    isLiked: false,
-    image: film,
-  },
-  {
-    id: 4,
-    name: '33 слова о дизайне',
-    duration: '1ч42м',
-    isLiked: false,
-    image: film,
-  },
-  {
-    id: 5,
-    name: '33 слова о дизайне',
-    duration: '1ч42м',
-    isLiked: true,
-    image: film,
-  },
-  {
-    id: 6,
-    name: '33 слова о дизайне',
-    duration: '1ч42м',
-    isLiked: false,
-    image: film,
-  },
-  {
-    id: 7,
-    name: '33 слова о дизайне',
-    duration: '1ч42м',
-    isLiked: false,
-    image: film,
-  },
-  {
-    id: 8,
-    name: '33 слова о дизайне',
-    duration: '1ч42м',
-    isLiked: true,
-    image: film,
-  },
-  {
-    id: 9,
-    name: '33 слова о дизайне',
-    duration: '1ч42м',
-    isLiked: false,
-    image: film,
-  },
-  {
-    id: 10,
-    name: '33 слова о дизайне',
-    duration: '1ч42м',
-    isLiked: false,
-    image: film,
-  },
-  {
-    id: 11,
-    name: '33 слова о дизайне',
-    duration: '1ч42м',
-    isLiked: true,
-    image: film,
-  },
-  {
-    id: 12,
-    name: '33 слова о дизайне',
-    duration: '1ч42м',
-    isLiked: false,
-    image: film,
-  },
-  {
-    id: 13,
-    name: '33 слова о дизайне',
-    duration: '1ч42м',
-    isLiked: true,
-    image: film,
-  },
-  {
-    id: 14,
-    name: '33 слова о дизайне',
-    duration: '1ч42м',
-    isLiked: false,
-    image: film,
-  },
-  {
-    id: 15,
-    name: '33 слова о дизайне',
-    duration: '1ч42м',
-    isLiked: false,
-    image: film,
-  },
-  {
-    id: 16,
-    name: '33 слова о дизайне',
-    duration: '1ч42м',
-    isLiked: true,
-    image: film,
-  },
-];
-
-const SAVED_FILMS = [
-  {
-    id: 1,
-    name: '33 слова о дизайне',
-    duration: '1ч42м',
-    image: film,
-  },
-  {
-    id: 2,
-    name: '33 слова о дизайне',
-    duration: '1ч42м',
-    image: film,
-  },
-  {
-    id: 3,
-    name: '33 слова о дизайне',
-    duration: '1ч42м',
-    image: film,
-  },
-];
+import moviesApi from '../../utils/MoviesApi';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [movies, setMovies] = useState([]);
+  const [isMoviesError, setIsMoviesError] = useState(false);
   console.log(setIsLoggedIn);
+
+  const getMovies = async () =>
+    moviesApi
+      .getMovies()
+      .then((res) => {
+        setMovies(res);
+        return res;
+      })
+      .catch((err) => {
+        console.error(err);
+        setIsMoviesError(true);
+      });
 
   return (
     <div className="App">
@@ -167,7 +45,7 @@ function App() {
           path="/movies"
           element={
             <MainContainer>
-              <Movies movies={FILMS} />
+              <Movies allMovies={movies} getMovies={getMovies} isError={isMoviesError} />
             </MainContainer>
           }
         />
@@ -176,7 +54,7 @@ function App() {
           path="/saved-movies"
           element={
             <MainContainer>
-              <Movies movies={SAVED_FILMS} isSaved />
+              <Movies isSaved />
             </MainContainer>
           }
         />
