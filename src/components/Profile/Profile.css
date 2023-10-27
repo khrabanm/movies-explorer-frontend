@@ -51,6 +51,14 @@
   text-align: end;
 }
 
+.profile__input_error {
+  color: var(--red);
+}
+
+.profile__label_error {
+  color: var(--red);
+}
+
 .profile__input:focus,
 .profile__input:focus-visible {
   outline: none;
@@ -90,6 +98,13 @@
   font-size: 11px;
   text-align: center;
 }
+
+.profile__save_disabled {
+  cursor: default;
+  background: var(--gray-light);
+  color: var(--gray);
+}
+
 
 @media (max-width: 1152px) {
   .profile {
