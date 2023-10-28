@@ -1,9 +1,9 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './MoviesCard.css';
 import Button from '../Button/Button';
 import deleteSaved from '../../images/delete-saved.svg';
 import RadioButton from '../RadioButton/RadioButton';
-import { MOVIES_IMAGE_URL } from '../../utils/consts';
+import usePrevious from '../../hooks/usePrevious';
 
 const getDuration = (duration) => {
   const hours = Math.trunc(duration / 60);
@@ -11,29 +11,54 @@ const getDuration = (duration) => {
   return `${hours ? `${hours}ч` : ''} ${minutes}м`;
 };
 
-function MoviesCard({ movie, isSaved }) {
-  const [checked, setChecked] = useState(false);
+function MoviesCard({ movie, savedMovies, isSaved, onSave, onDelete }) {
+  const [checked, setChecked] = useState(
+    savedMovies.some((item) => item.movieId === movie.movieId),
+  );
+  const prevSavedMoviesLength = usePrevious(savedMovies.length);
+  const handleSave = () => {
+    setChecked(true);
+    onSave({ ...movie, isSaved: undefined }).catch((error) => {
+      console.error(error);
+      setChecked(false);
+    });
+  };
+
+  const handleDelete = () => {
+    setChecked(false);
+    const savedMovie = savedMovies.find((item) => item.movieId === movie.movieId);
+    onDelete(savedMovie._id).catch((error) => {
+      console.error(error);
+      setChecked(true);
+    });
+  };
+
+  const handleSaveClick = () => {
+    if (checked) {
+      handleDelete();
+    } else {
+      handleSave();
+    }
+  };
+
+  useEffect(() => {
+    if (prevSavedMoviesLength !== savedMovies.length) {
+      setChecked(savedMovies.some((item) => item.movieId === movie.movieId));
+    }
+  }, [movie.movieId, prevSavedMoviesLength, savedMovies]);
 
   return (
     <article className="movies-card">
-      <img
-        className="movies-card__image"
-        src={`${MOVIES_IMAGE_URL}${movie.image.url}`}
-        alt={movie.nameRU}
-      />
+      <img className="movies-card__image" src={movie.image} alt={movie.nameRU} />
       <div className="movies-card__info">
         <div className="movies-card__title-container">
           <h2 className="movies-card__title">{movie.nameRU}</h2>
           {isSaved ? (
-            <Button className="movies-card__delete" type="button">
+            <Button className="movies-card__delete" type="button" onClick={handleDelete}>
               <img src={deleteSaved} alt="Удалить" />
             </Button>
           ) : (
-            <RadioButton
-              name={movie.nameRU}
-              checked={checked}
-              onChange={() => setChecked((prev) => !prev)}
-            />
+            <RadioButton name={movie.nameRU} checked={checked} onChange={handleSaveClick} />
           )}
         </div>
         <p className="movies-card__duration">{getDuration(movie.duration)}</p>

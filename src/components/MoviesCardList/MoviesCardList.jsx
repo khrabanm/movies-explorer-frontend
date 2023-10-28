@@ -17,7 +17,7 @@ const getAddVisibleMovies = (width) => {
   return MOVIES_COUNT.DESKTOP_ADD;
 };
 
-function MoviesCardList({ movies, isSaved = false }) {
+function MoviesCardList({ movies, savedMovies, onSave, onDelete, isSaved = false }) {
   const { width } = useWindowDimensions();
   const [visibleMovies, setVisibleMovies] = useState(getVisibleMovies(width));
   useEffect(() => {
@@ -34,8 +34,14 @@ function MoviesCardList({ movies, isSaved = false }) {
         {movies.map((movie, idx) => {
           if (idx >= visibleMovies) return null;
           return (
-            <li className="movies-card-list__item" key={movie.id}>
-              <MoviesCard movie={movie} isSaved={isSaved} />
+            <li className="movies-card-list__item" key={movie.movieId}>
+              <MoviesCard
+                movie={movie}
+                savedMovies={savedMovies}
+                isSaved={isSaved}
+                onSave={onSave}
+                onDelete={onDelete}
+              />
             </li>
           );
         })}
