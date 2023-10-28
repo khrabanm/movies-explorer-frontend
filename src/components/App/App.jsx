@@ -11,6 +11,7 @@ import Authentication from '../Authentication/Authentication';
 import moviesApi from '../../utils/MoviesApi';
 import mainApi from '../../utils/MainApi';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
+import { MOVIES_IMAGE_URL } from '../../utils/consts';
 
 function App() {
   const [currentUser, setCurrentUser] = useState({
@@ -19,9 +20,23 @@ function App() {
   });
   const [isLoggedIn, setIsLoggedIn] = useState(true);
   const [movies, setMovies] = useState([]);
+  const [savedMovies, setSavedMovies] = useState([]);
   const [isMoviesError, setIsMoviesError] = useState(false);
+  const [isSavedMoviesError, setIsSavedMoviesError] = useState(false);
 
   const navigate = useNavigate();
+
+  const getSavedMovies = async () =>
+    mainApi
+      .getSavedMovies()
+      .then(({ data }) => {
+        setSavedMovies(data.movies);
+        return data.movies;
+      })
+      .catch((err) => {
+        console.error(err);
+        setIsSavedMoviesError(true);
+      });
 
   const checkToken = useCallback(async () => {
     if (localStorage.getItem('token') && localStorage.getItem('token') !== 'undefined') {
@@ -30,6 +45,7 @@ function App() {
         .then(({ data }) => {
           setIsLoggedIn(true);
           setCurrentUser((prevState) => ({ ...prevState, ...data }));
+          getSavedMovies();
           return data;
         })
         .catch((err) => {
@@ -37,6 +53,7 @@ function App() {
           return err;
         });
     }
+    setIsLoggedIn(false);
     return null;
   }, []);
 
@@ -44,8 +61,17 @@ function App() {
     moviesApi
       .getMovies()
       .then((res) => {
-        setMovies(res);
-        return res;
+        const allMovies = res.map((movie) => ({
+          ...movie,
+          image: `${MOVIES_IMAGE_URL}${movie.image.url}`,
+          thumbnail: `${MOVIES_IMAGE_URL}${movie.image.formats.thumbnail.url}`,
+          movieId: movie.id,
+          id: undefined,
+          created_at: undefined,
+          updated_at: undefined,
+        }));
+        setMovies(allMovies);
+        return allMovies;
       })
       .catch((err) => {
         console.error(err);
@@ -82,6 +108,17 @@ function App() {
       return res;
     });
 
+  const handleSaveMovie = async (movie) =>
+    mainApi.saveMovie(movie).then((res) => {
+      setSavedMovies((prevState) => [...prevState, res]);
+      return res;
+    });
+
+  const handleDeleteMovie = async (movieId) =>
+    mainApi.deleteMovie(movieId).then(() => {
+      setSavedMovies((prevState) => prevState.filter((movie) => movie._id !== movieId));
+    });
+
   useEffect(() => {
     checkToken();
   }, [checkToken]);
@@ -104,7 +141,14 @@ function App() {
             path="/movies"
             element={
               <MainContainer>
-                <Movies allMovies={movies} getMovies={getMovies} isError={isMoviesError} />
+                <Movies
+                  allMovies={movies}
+                  savedMovies={savedMovies}
+                  getMovies={getMovies}
+                  onSave={handleSaveMovie}
+                  onDelete={handleDeleteMovie}
+                  isError={isMoviesError}
+                />
               </MainContainer>
             }
           />
@@ -113,7 +157,13 @@ function App() {
             path="/saved-movies"
             element={
               <MainContainer>
-                <Movies isSaved />
+                <Movies
+                  savedMovies={savedMovies}
+                  getMovies={getSavedMovies}
+                  onDelete={handleDeleteMovie}
+                  isError={isSavedMoviesError}
+                  isSaved
+                />
               </MainContainer>
             }
           />

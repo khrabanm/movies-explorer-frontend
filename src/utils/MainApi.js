@@ -61,6 +61,34 @@ class MainApi extends Api {
       },
       body: JSON.stringify(data),
     }).then((res) => MainApi.handleResponse(res));
+
+  getSavedMovies = () =>
+    fetch(`${this.url}/movies`, {
+      method: 'GET',
+      headers: {
+        ...this.headers,
+        authorization: `Bearer ${localStorage.getItem('token')}`,
+      },
+    }).then((res) => MainApi.handleResponse(res));
+
+  saveMovie = (data) =>
+    fetch(`${this.url}/movies`, {
+      method: 'POST',
+      headers: {
+        ...this.headers,
+        authorization: `Bearer ${localStorage.getItem('token')}`,
+      },
+      body: JSON.stringify(data),
+    }).then((res) => MainApi.handleResponse(res));
+
+  deleteMovie = (movieId) =>
+    fetch(`${this.url}/movies/${movieId}`, {
+      method: 'DELETE',
+      headers: {
+        ...this.headers,
+        authorization: `Bearer ${localStorage.getItem('token')}`,
+      },
+    }).then((res) => MainApi.handleResponse(res));
 }
 
 export default new MainApi({
