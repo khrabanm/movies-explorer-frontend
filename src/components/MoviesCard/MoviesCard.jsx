@@ -49,7 +49,9 @@ function MoviesCard({ movie, savedMovies, isSaved, onSave, onDelete }) {
 
   return (
     <article className="movies-card">
-      <img className="movies-card__image" src={movie.image} alt={movie.nameRU} />
+      <a href={movie.trailerLink} target="_blank" rel="noreferrer" className="movies-card__link">
+        <img className="movies-card__image" src={movie.image} alt={movie.nameRU} />
+      </a>
       <div className="movies-card__info">
         <div className="movies-card__title-container">
           <h2 className="movies-card__title">{movie.nameRU}</h2>
