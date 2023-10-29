@@ -12,6 +12,7 @@ import moviesApi from '../../utils/MoviesApi';
 import mainApi from '../../utils/MainApi';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
 import { MOVIES_IMAGE_URL } from '../../utils/consts';
+import { ProtectedAuthRoute, ProtectedRoute } from '../ProtectedRoute/ProtectedRoute';
 
 function App() {
   const [currentUser, setCurrentUser] = useState({
@@ -140,48 +141,64 @@ function App() {
             exact
             path="/movies"
             element={
-              <MainContainer>
-                <Movies
-                  allMovies={movies}
-                  savedMovies={savedMovies}
-                  getMovies={getMovies}
-                  onSave={handleSaveMovie}
-                  onDelete={handleDeleteMovie}
-                  isError={isMoviesError}
-                />
-              </MainContainer>
+              <ProtectedRoute isLoggedIn={isLoggedIn}>
+                <MainContainer>
+                  <Movies
+                    allMovies={movies}
+                    savedMovies={savedMovies}
+                    getMovies={getMovies}
+                    onSave={handleSaveMovie}
+                    onDelete={handleDeleteMovie}
+                    isError={isMoviesError}
+                  />
+                </MainContainer>
+              </ProtectedRoute>
             }
           />
           <Route
             exact
             path="/saved-movies"
             element={
-              <MainContainer>
-                <Movies
-                  savedMovies={savedMovies}
-                  getMovies={getSavedMovies}
-                  onDelete={handleDeleteMovie}
-                  isError={isSavedMoviesError}
-                  isSaved
-                />
-              </MainContainer>
+              <ProtectedRoute isLoggedIn={isLoggedIn}>
+                <MainContainer>
+                  <Movies
+                    savedMovies={savedMovies}
+                    getMovies={getSavedMovies}
+                    onDelete={handleDeleteMovie}
+                    isError={isSavedMoviesError}
+                    isSaved
+                  />
+                </MainContainer>
+              </ProtectedRoute>
             }
           />
           <Route
             exact
             path="/profile"
             element={
-              <>
+              <ProtectedRoute isLoggedIn={isLoggedIn}>
                 <Header />
                 <Profile onLogOut={handleLogOut} onUpdate={handleUpdateUser} />
-              </>
+              </ProtectedRoute>
             }
           />
-          <Route exact path="/signin" element={<Authentication onSubmit={handleLogin} />} />
+          <Route
+            exact
+            path="/signin"
+            element={
+              <ProtectedAuthRoute isLoggedIn={isLoggedIn}>
+                <Authentication onSubmit={handleLogin} />
+              </ProtectedAuthRoute>
+            }
+          />
           <Route
             exact
             path="/signup"
-            element={<Authentication onSubmit={handleRegister} isSignIn={false} />}
+            element={
+              <ProtectedAuthRoute isLoggedIn={isLoggedIn}>
+                <Authentication onSubmit={handleRegister} isSignIn={false} />
+              </ProtectedAuthRoute>
+            }
           />
           <Route path="*" element={<PageNotFound />} />
         </Routes>
