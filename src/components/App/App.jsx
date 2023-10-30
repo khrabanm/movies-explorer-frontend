@@ -11,7 +11,7 @@ import Authentication from '../Authentication/Authentication';
 import moviesApi from '../../utils/MoviesApi';
 import mainApi from '../../utils/MainApi';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
-import { MOVIES_IMAGE_URL } from '../../utils/consts';
+import { MOVIES_IMAGE_URL, UNAUTHORIZED_ERROR } from '../../utils/consts';
 import { ProtectedAuthRoute, ProtectedRoute } from '../ProtectedRoute/ProtectedRoute';
 
 function App() {
@@ -27,17 +27,35 @@ function App() {
 
   const navigate = useNavigate();
 
-  const getSavedMovies = async () =>
-    mainApi
-      .getSavedMovies()
-      .then(({ data }) => {
-        setSavedMovies(data.movies);
-        return data.movies;
-      })
-      .catch((err) => {
-        console.error(err);
-        setIsSavedMoviesError(true);
-      });
+  const logout = useCallback(() => {
+    setIsLoggedIn(false);
+    setCurrentUser({
+      email: '',
+      name: '',
+    });
+    setMovies([]);
+    setSavedMovies([]);
+    localStorage.clear();
+    navigate('/', { replace: true });
+  }, [navigate]);
+
+  const getSavedMovies = useCallback(
+    async () =>
+      mainApi
+        .getSavedMovies()
+        .then(({ data }) => {
+          setSavedMovies(data.movies);
+          return data.movies;
+        })
+        .catch((err) => {
+          console.error(err);
+          if (err.message === UNAUTHORIZED_ERROR) {
+            logout();
+          }
+          setIsSavedMoviesError(true);
+        }),
+    [logout],
+  );
 
   const checkToken = useCallback(async () => {
     if (localStorage.getItem('token') && localStorage.getItem('token') !== 'undefined') {
@@ -51,12 +69,15 @@ function App() {
         })
         .catch((err) => {
           console.error(err);
+          if (err.message === UNAUTHORIZED_ERROR) {
+            logout();
+          }
           return err;
         });
     }
     setIsLoggedIn(false);
     return null;
-  }, []);
+  }, [getSavedMovies, logout]);
 
   const getMovies = async () =>
     moviesApi
@@ -100,25 +121,55 @@ function App() {
       })
       .catch((err) => {
         console.error(err);
+        if (err.message === UNAUTHORIZED_ERROR) {
+          logout();
+        }
         return err;
       });
 
   const handleUpdateUser = async ({ name, email }) =>
-    mainApi.updateUserData({ name, email }).then((res) => {
-      setCurrentUser((prevState) => ({ ...prevState, name, email }));
-      return res;
-    });
+    mainApi
+      .updateUserData({ name, email })
+      .then((res) => {
+        setCurrentUser((prevState) => ({ ...prevState, name, email }));
+        return res;
+      })
+      .catch((err) => {
+        console.error(err);
+        if (err.message === UNAUTHORIZED_ERROR) {
+          logout();
+        }
+        return Promise.reject(new Error(err));
+      });
 
   const handleSaveMovie = async (movie) =>
-    mainApi.saveMovie(movie).then((res) => {
-      setSavedMovies((prevState) => [...prevState, res]);
-      return res;
-    });
+    mainApi
+      .saveMovie(movie)
+      .then((res) => {
+        setSavedMovies((prevState) => [...prevState, res]);
+        return res;
+      })
+      .catch((err) => {
+        console.error(err);
+        if (err.message === UNAUTHORIZED_ERROR) {
+          logout();
+        }
+        return Promise.reject(new Error(err));
+      });
 
   const handleDeleteMovie = async (movieId) =>
-    mainApi.deleteMovie(movieId).then(() => {
-      setSavedMovies((prevState) => prevState.filter((movie) => movie._id !== movieId));
-    });
+    mainApi
+      .deleteMovie(movieId)
+      .then(() => {
+        setSavedMovies((prevState) => prevState.filter((movie) => movie._id !== movieId));
+      })
+      .catch((err) => {
+        console.error(err);
+        if (err.message === UNAUTHORIZED_ERROR) {
+          logout();
+        }
+        return Promise.reject(new Error(err));
+      });
 
   useEffect(() => {
     checkToken();

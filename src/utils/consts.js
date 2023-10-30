@@ -19,6 +19,8 @@ export const MOVIES_TEXT_ERROR =
 export const MOVIES_TEXT_NOT_FOUND = 'Ничего не найдено';
 export const PROFILE_SUCCESS_MESSAGE = 'Данные успешно обновлены';
 
+export const UNAUTHORIZED_ERROR = 'Error: 401';
+
 export const FORM_REGEXP = {
   name: /^[a-zA-ZА-Яа-яЁё\s].{1,19}$/,
   password: /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})/,
