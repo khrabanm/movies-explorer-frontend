@@ -1,11 +1,12 @@
 .movies-card-list__list {
   padding: 0;
-  margin: 0;
   list-style-type: none;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
   column-gap: 20px;
   row-gap: 32px;
+  max-width: 1719px;
+  margin: 0 auto;
 }
 
 .movies-card-list__button {

@@ -3,18 +3,22 @@ import './MoviesCardList.css';
 import MoviesCard from '../MoviesCard/MoviesCard';
 import Button from '../Button/Button';
 import useWindowDimensions from '../../hooks/useWindowDimensions';
-import { MOVIES_COUNT } from '../../utils/consts';
+import { BREAKPOINTS, MOVIES_COUNT } from '../../utils/consts';
 
 const getVisibleMovies = (width) => {
-  if (width <= 767) return MOVIES_COUNT.MOBILE;
-  if (width <= 1152) return MOVIES_COUNT.TABLET;
-  return MOVIES_COUNT.DESKTOP;
+  if (width <= BREAKPOINTS.MOBILE_MAX) return MOVIES_COUNT.MOBILE;
+  if (width <= BREAKPOINTS.TABLET_MAX) return MOVIES_COUNT.TABLET;
+  if (width <= BREAKPOINTS.LAPTOP_MAX) return MOVIES_COUNT.LAPTOP;
+  if (width <= BREAKPOINTS.DESKTOP_MAX) return MOVIES_COUNT.DESKTOP;
+  return MOVIES_COUNT.DESKTOP_4K;
 };
 
 const getAddVisibleMovies = (width) => {
-  if (width <= 767) return MOVIES_COUNT.MOBILE_ADD;
-  if (width <= 1152) return MOVIES_COUNT.TABLET_ADD;
-  return MOVIES_COUNT.DESKTOP_ADD;
+  if (width <= BREAKPOINTS.MOBILE_MAX) return MOVIES_COUNT.MOBILE_ADD;
+  if (width <= BREAKPOINTS.TABLET_MAX) return MOVIES_COUNT.TABLET_ADD;
+  if (width <= BREAKPOINTS.LAPTOP_MAX) return MOVIES_COUNT.LAPTOP_ADD;
+  if (width <= BREAKPOINTS.DESKTOP_MAX) return MOVIES_COUNT.DESKTOP_ADD;
+  return MOVIES_COUNT.DESKTOP_4K_ADD;
 };
 
 function MoviesCardList({ movies, savedMovies, onSave, onDelete, isSaved = false }) {
