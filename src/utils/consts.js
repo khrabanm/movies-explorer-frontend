@@ -6,12 +6,23 @@ export const MOVIES_IMAGE_URL = 'https://api.nomoreparties.co/';
 export const SHORT_MOVIE_DURATION = 40;
 
 export const MOVIES_COUNT = {
+  DESKTOP_4K: 20,
   DESKTOP: 16,
+  LAPTOP: 12,
   TABLET: 8,
   MOBILE: 5,
+  DESKTOP_4K_ADD: 5,
   DESKTOP_ADD: 4,
+  LAPTOP_ADD: 3,
   TABLET_ADD: 2,
   MOBILE_ADD: 2,
+};
+
+export const BREAKPOINTS = {
+  MOBILE_MAX: 766,
+  TABLET_MAX: 929,
+  LAPTOP_MAX: 1279,
+  DESKTOP_MAX: 1605,
 };
 
 export const MOVIES_TEXT_ERROR =
