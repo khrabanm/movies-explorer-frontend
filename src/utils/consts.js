@@ -17,6 +17,7 @@ export const MOVIES_COUNT = {
 export const MOVIES_TEXT_ERROR =
   'Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз';
 export const MOVIES_TEXT_NOT_FOUND = 'Ничего не найдено';
+export const PROFILE_SUCCESS_MESSAGE = 'Данные успешно обновлены';
 
 export const FORM_REGEXP = {
   name: /^[a-zA-ZА-Яа-яЁё\s].{1,19}$/,

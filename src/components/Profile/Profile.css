@@ -99,6 +99,13 @@
   text-align: center;
 }
 
+.profile__success {
+  margin: 0 0 20px;
+  color: var(--green);
+  font-size: 11px;
+  text-align: center;
+}
+
 .profile__save_disabled {
   cursor: default;
   background: var(--gray-light);

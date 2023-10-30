@@ -4,20 +4,31 @@ import Button from '../Button/Button';
 import CurrentUserContext from '../../contexts/CurrentUserContext';
 import Preloader from '../Preloader/Preloader';
 import useFormWithValidation from '../../hooks/useFormWithValidation';
-import { PROFILE_ERRORS_MESSAGES, SERVER_ERRORS_CODE } from '../../utils/consts';
+import {
+  PROFILE_ERRORS_MESSAGES,
+  PROFILE_SUCCESS_MESSAGE,
+  SERVER_ERRORS_CODE,
+} from '../../utils/consts';
 
 function Profile({ onLogOut, onUpdate }) {
   const [isEdit, setIsEdit] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
+  const [isSuccess, setIsSuccess] = useState(false);
   const currentUser = useContext(CurrentUserContext);
-  const { values, setValues, errors, handleChange, isValid } = useFormWithValidation();
+  const { values, setValues, errors, handleChange, isValid, resetForm } = useFormWithValidation();
 
   useEffect(() => {
     if (isEdit) {
       setValues(currentUser);
     }
   }, [currentUser, isEdit, setValues]);
+
+  const handleSetEdit = () => {
+    setIsEdit(true);
+    setIsSuccess(false);
+    setError('');
+  };
 
   const handleLogout = () => {
     if (isLoading) return;
@@ -37,7 +48,9 @@ function Profile({ onLogOut, onUpdate }) {
     setIsLoading(true);
     onUpdate({ ...currentUser, ...values })
       .then(() => {
+        resetForm();
         setIsEdit(false);
+        setIsSuccess(true);
         setError('');
       })
       .catch((err) => {
@@ -112,7 +125,8 @@ function Profile({ onLogOut, onUpdate }) {
               </>
             ) : (
               <>
-                <Button className="profile__edit" onClick={() => setIsEdit(true)}>
+                {isSuccess && <p className="profile__success">{PROFILE_SUCCESS_MESSAGE}</p>}
+                <Button className="profile__edit" onClick={handleSetEdit}>
                   Редактировать
                 </Button>
                 <Button className="profile__exit" onClick={handleLogout}>
