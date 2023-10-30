@@ -7,15 +7,32 @@ import Preloader from '../Preloader/Preloader';
 import usePrevious from '../../hooks/usePrevious';
 
 function Movies({ allMovies, savedMovies, getMovies, onSave, onDelete, isError, isSaved = false }) {
-  const [state, setState] = useState(
-    localStorage.moviesState && !isSaved
+  const setInitialStates = () => {
+    if (isSaved) {
+      if (localStorage.savedMoviesState) {
+        const savedMoviesState = JSON.parse(localStorage.savedMoviesState);
+        return {
+          ...savedMoviesState,
+          movies: savedMoviesState.movies.filter((movie) =>
+            savedMovies.find((savedMovie) => savedMovie.movieId === movie.movieId),
+          ),
+        };
+      }
+      return {
+        movies: savedMovies,
+        isShortMovies: false,
+        searchQuery: '',
+      };
+    }
+    return localStorage.moviesState
       ? JSON.parse(localStorage.moviesState)
       : {
-          movies: !isSaved ? [] : savedMovies,
+          movies: [],
           isShortMovies: false,
           searchQuery: '',
-        },
-  );
+        };
+  };
+  const [state, setState] = useState(setInitialStates());
   const [isLoading, setIsLoading] = useState(false);
   const prevIsSaved = usePrevious(isSaved);
 
@@ -48,7 +65,7 @@ function Movies({ allMovies, savedMovies, getMovies, onSave, onDelete, isError, 
       searchQuery,
     };
 
-    if (!isSaved) localStorage.setItem('moviesState', JSON.stringify(newState));
+    localStorage.setItem(!isSaved ? 'moviesState' : 'savedMoviesState', JSON.stringify(newState));
 
     setState((prevState) => ({
       ...prevState,
@@ -71,11 +88,21 @@ function Movies({ allMovies, savedMovies, getMovies, onSave, onDelete, isError, 
 
   useEffect(() => {
     if (isSaved && prevIsSaved !== isSaved) {
-      setState({
-        isShortMovies: false,
-        searchQuery: '',
-        movies: savedMovies,
-      });
+      if (localStorage.savedMoviesState) {
+        const savedMoviesState = JSON.parse(localStorage.savedMoviesState);
+        setState({
+          ...savedMoviesState,
+          movies: savedMoviesState.movies.filter((movie) =>
+            savedMovies.find((savedMovie) => savedMovie.movieId === movie.movieId),
+          ),
+        });
+      } else {
+        setState({
+          isShortMovies: false,
+          searchQuery: '',
+          movies: savedMovies,
+        });
+      }
     } else if (!isSaved && prevIsSaved !== isSaved) {
       setState(
         localStorage.moviesState
@@ -88,6 +115,15 @@ function Movies({ allMovies, savedMovies, getMovies, onSave, onDelete, isError, 
       );
     }
   }, [savedMovies, isSaved, prevIsSaved]);
+
+  useEffect(
+    () => () => {
+      if (isSaved) {
+        localStorage.removeItem('savedMoviesState');
+      }
+    },
+    [isSaved],
+  );
 
   return (
     <section className="movies">
