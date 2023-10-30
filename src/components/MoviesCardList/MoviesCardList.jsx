@@ -4,6 +4,7 @@ import MoviesCard from '../MoviesCard/MoviesCard';
 import Button from '../Button/Button';
 import useWindowDimensions from '../../hooks/useWindowDimensions';
 import { BREAKPOINTS, MOVIES_COUNT } from '../../utils/consts';
+import usePrevious from '../../hooks/usePrevious';
 
 const getVisibleMovies = (width) => {
   if (width <= BREAKPOINTS.MOBILE_MAX) return MOVIES_COUNT.MOBILE;
@@ -24,10 +25,24 @@ const getAddVisibleMovies = (width) => {
 function MoviesCardList({ movies, savedMovies, onSave, onDelete, isSaved = false }) {
   const { width } = useWindowDimensions();
   const [visibleMovies, setVisibleMovies] = useState(getVisibleMovies(width));
+  const prevMovies = usePrevious(movies);
 
   useEffect(() => {
     setVisibleMovies(getVisibleMovies(width));
-  }, [width, movies]);
+  }, [width]);
+
+  useEffect(() => {
+    if (prevMovies) {
+      if (prevMovies.length !== movies.length) setVisibleMovies(getVisibleMovies(width));
+      if (prevMovies.length === movies.length) {
+        let isSame = true;
+        prevMovies.forEach((movie, idx) => {
+          if (movie.movieId !== movies[idx].movieId) isSame = false;
+        });
+        if (!isSame) setVisibleMovies(getVisibleMovies(width));
+      }
+    }
+  }, [width, movies, prevMovies]);
 
   const handleAddMovies = () => {
     setVisibleMovies((prev) => prev + getAddVisibleMovies(width));
