@@ -15,6 +15,7 @@ function Profile({ onLogOut, onUpdate }) {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
   const [isSuccess, setIsSuccess] = useState(false);
+  const [isSame, setIsSame] = useState(true);
   const currentUser = useContext(CurrentUserContext);
   const { values, setValues, errors, handleChange, isValid, resetForm } = useFormWithValidation();
 
@@ -23,6 +24,12 @@ function Profile({ onLogOut, onUpdate }) {
       setValues(currentUser);
     }
   }, [currentUser, isEdit, setValues]);
+
+  useEffect(() => {
+    if (isEdit) {
+      setIsSame(currentUser.name === values.name && currentUser.email === values.email);
+    }
+  }, [currentUser, isEdit, values]);
 
   const handleSetEdit = () => {
     setIsEdit(true);
@@ -117,8 +124,8 @@ function Profile({ onLogOut, onUpdate }) {
                 <Button
                   type="submit"
                   form="profile"
-                  disabled={!isValid}
-                  className={`profile__save ${!isValid && 'profile__save_disabled'}`}
+                  disabled={!isValid || isSame}
+                  className={`profile__save ${(!isValid || isSame) && 'profile__save_disabled'}`}
                 >
                   Сохранить
                 </Button>
