@@ -37,7 +37,7 @@
     border-radius: 10px;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
     .navigation {
         flex-direction: column;
         gap: 28px;

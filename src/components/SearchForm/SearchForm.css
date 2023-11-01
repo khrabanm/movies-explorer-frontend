@@ -1,4 +1,5 @@
 .search-form__container {
+  position: relative;
   width: 100%;
   box-sizing: border-box;
   display: grid;
@@ -13,6 +14,11 @@
 .search-form__container:focus-within {
   outline: 1px solid var(--violet);
 }
+
+.search-form__container--error {
+  outline: 1px solid var(--red);
+}
+
 
 .search-form__form {
   display: flex;
@@ -34,6 +40,17 @@
 .search-form__button {
   height: 34px;
   border-radius: 48px;
+}
+
+.search-form__error {
+  position: absolute;
+  bottom: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 10px;
+  font-weight: 400;
+  line-height: normal;
+  color: var(--red);
 }
 
 .search-form__button:focus, .search-form__button:focus-visible {

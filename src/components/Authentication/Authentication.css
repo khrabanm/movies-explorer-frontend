@@ -76,6 +76,13 @@
   line-height: normal;
 }
 
+.authentication__button_disabled {
+  cursor: default;
+  background: var(--gray-light);
+  color: var(--gray);
+}
+
+
 @media (max-width: 1152px) {
   .authentication {
     grid-template-rows: 379px 1fr;

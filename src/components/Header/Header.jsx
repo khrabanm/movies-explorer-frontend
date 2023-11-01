@@ -8,6 +8,7 @@ import Button from '../Button/Button';
 import Link from '../Link/Link';
 import useWindowDimensions from '../../hooks/useWindowDimensions';
 import Menu from '../Menu/Menu';
+import { BREAKPOINTS } from '../../utils/consts';
 
 function Header({ isLoggedIn = true }) {
   const [open, setOpen] = useState(false);
@@ -34,14 +35,16 @@ function Header({ isLoggedIn = true }) {
     <header className={getModifier('header')}>
       <div className="header__container container">
         <Logo />
-        {isLoggedIn && width > 768 && <Navigation className="header__nav" isWhite={isMainPage} />}
+        {isLoggedIn && width > BREAKPOINTS.MOBILE_MAX && (
+          <Navigation className="header__nav" isWhite={isMainPage} />
+        )}
         <nav className="header__buttons">
-          {isLoggedIn && width > 768 && (
+          {isLoggedIn && width > BREAKPOINTS.MOBILE_MAX && (
             <Button href="/profile" className="header__account">
               Аккаунт
             </Button>
           )}
-          {isLoggedIn && width <= 768 && (
+          {isLoggedIn && width <= BREAKPOINTS.MOBILE_MAX && (
             <Button
               className={getModifier('header__menu')}
               onClick={open ? handleCloseMenu : handleOpenMenu}
@@ -73,7 +76,7 @@ function Header({ isLoggedIn = true }) {
           )}
         </nav>
       </div>
-      {isLoggedIn && width <= 768 && open && (
+      {isLoggedIn && width <= BREAKPOINTS.MOBILE_MAX && open && (
         <Menu onClick={handleCloseMenu}>
           <Navigation />
           <Button href="/profile" className="header__account">

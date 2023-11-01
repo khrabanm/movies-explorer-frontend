@@ -7,7 +7,8 @@ function RadioButton({ checked, onChange, name }) {
     <label className="radio-button">
       <input
         className="radio-button__input visually-hidden"
-        type="radio"
+        type="checkbox"
+        value={checked}
         checked={checked}
         onChange={onChange}
         name={name}
